@@ -1,0 +1,21 @@
+{
+    "notification_recipients": "your_notification_recipients",
+    "email_sender": "your_email_sender@gmail.com",
+    "email_password": "your_email_password",
+    "totp_secret": "your_totp_secret",
+    "broker_username": "your_broker_username",
+    "broker_password": "your_broker_password",
+    "api_key": "your_api_key",
+    "api_secret": "your_api_secret",
+    "database_host": "your_timescaledb_host",
+    "database_user": "your_timescaledb_user",
+    "database_password": "your_timescaledb_password",
+    "database_port": 5432,
+    "token_database_name": "broker_tokens",
+    "equity_database_name": "market_data_equities",
+    "options_database_name": "market_data_options",
+    "banknifty_options_database_name": "market_data_banknifty_options",
+    "market_close_hour": 15,
+    "market_close_minute": 35,
+    "backup_thread_count": 4
+}

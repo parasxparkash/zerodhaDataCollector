@@ -1,0 +1,14 @@
+# Market Data Acquisition System Requirements
+# Author: Paras Parkash
+
+# Core dependencies
+kiteconnect==5.0.1
+selenium==4.6
+pandas>=1.5.0
+numpy>=1.21.0
+psycopg2-binary>=2.9.0
+sqlalchemy>=1.4.0
+pyotp>=2.6.0
+webdriver-manager>=4.0.1
+requests>=2.28.0
+timescale==0.1.0
