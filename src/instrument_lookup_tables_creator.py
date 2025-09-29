@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Downloads Instrument List from Broker
 Lists the exchange tokens (instrument_token) to be subscribed, based on the lookup table Generated / Updated by equity_universe_updater
@@ -47,9 +47,14 @@ Check _InstrumentsSubscribed.log to see the list of symbols subscribed to
     
 """
 
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 import pandas as pd
 import numpy as np
-import MySQLdb
+import psycopg2
 from datetime import datetime as dt, date, timedelta
 from dateutil.relativedelta import relativedelta, TH, WE
 from os import path, makedirs
@@ -64,7 +69,7 @@ from validate_system_config import is_system_config_default
 
 RETRY_COUNT = 5
 
-config_file = 'market_data_config.json'
+config_file = '../config/market_data_config.json'
 with open(config_file, 'r') as config_file_handle:
     system_config = json.load(config_file_handle)
 
@@ -443,8 +448,8 @@ def create_instrument_lookup_tables():
         
     if equity_universe_tables_created and nifty_options_tables_created and bank_options_tables_created:
         #Create {equity_database_name}
-        connection = MySQLdb.connect(host=database_host, user=database_user, passwd=database_password, port=database_port)
-        cursor = connection.cursor() 
+        connection = psycopg2.connect(host=database_host, user=database_user, password=database_password, port=database_port)
+        cursor = connection.cursor()
         cursor.execute(f'CREATE DATABASE IF NOT EXISTS {equity_database_name}')
         
         ##Create Daily table - {equity_database_name}.{daily_table_name} 

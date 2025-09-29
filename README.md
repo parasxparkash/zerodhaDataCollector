@@ -56,7 +56,7 @@ cd ZerodhaWebsocket
 ### 2. Install Dependencies
 
 ```bash
-pip install -r market_data_requirements.txt
+pip install -r config/market_data_requirements.txt
 ```
 
 ### 3. Set Up Database
@@ -79,7 +79,7 @@ pip install -r market_data_requirements.txt
 
 ### 1. Update Configuration File
 
-Edit `market_data_config.json` with your credentials:
+Edit `config/market_data_config.json` with your credentials:
 
 ```json
 {
@@ -146,6 +146,7 @@ The system runs through the following steps:
 Execute the main script:
 
 ```bash
+cd src
 python market_data_main.py
 ```
 
@@ -157,25 +158,31 @@ You can also run individual components for testing or specific tasks:
 
 ```bash
 # Request broker access token manually
-python broker_access_token_request.py
+cd src && python broker_access_token_request.py
+
+# Manual access token request (alternative script)
+cd scripts && python manual_access_token_request.py
+
+# Trading holiday shutdown script
+cd scripts && python trading_holiday_shutdown.py
 
 # Update equity universe
-python equity_universe_updater.py
+cd src && python equity_universe_updater.py
 
 # Create instrument lookup tables
-python instrument_lookup_tables_creator.py
+cd src && python instrument_lookup_tables_creator.py
 
 # Run market data ticker standalone
-python market_data_ticker.py
+cd src && python market_data_ticker.py
 
 # Run daily backup
-python daily_market_data_backup.py
+cd src && python daily_market_data_backup.py
 
 # Check if today is a trading holiday
-python check_trading_holiday.py
+cd src && python check_trading_holiday.py
 
 # Validate system configuration
-python validate_system_config.py
+cd src && python validate_system_config.py
 ```
 
 ### 4. Automated Execution
@@ -184,36 +191,42 @@ Set up a cron job to run the system automatically during market hours:
 
 ```bash
 # Example cron job to run at 9 AM on weekdays
-0 9 * * 1-5 /usr/bin/python3 /path/to/ZerodhaWebsocket/market_data_main.py
+0 9 * * 1-5 /usr/bin/python3 /path/to/ZerodhaWebsocket/src/market_data_main.py
 ```
 
 ## Project Structure
 
 ```
 ZerodhaWebsocket/
-├── market_data_main.py          # Main entry point orchestrating the workflow
-├── market_data_ticker.py        # WebSocket ticker for real-time data collection
-├── broker_access_token_request.py # Fetches/refreshes access tokens
-├── equity_universe_updater.py   # Updates instrument list from NSE
-├── instrument_lookup_tables_creator.py # Creates instrument-to-table mappings
-├── daily_market_data_backup.py # Daily data backup functionality
-├── market_data_mailer.py        # Email notification system
-├── check_trading_holiday.py     # Trading holiday detection
-├── validate_system_config.py    # Configuration validation
-├── system_error_logger.py       # Error logging system
-├── market_data_config.json      # Main configuration file
-├── market_data_requirements.txt # Python dependencies
-├── ind_nifty500list.csv         # Nifty 500 stock list
-├── tradingHolidaysAllYears.csv  # Trading holiday calendar
-├── instrument_lookup_tables/    # Generated lookup tables
-├── getExpiryPrefix/             # Utility for expiry calculations
-│   ├── getExpiryPrefix.py
-│   └── tradingHolidaysAllYears.csv
+├── src/                         # Source code modules
+│   ├── market_data_main.py      # Main entry point orchestrating the workflow
+│   ├── market_data_ticker.py    # WebSocket ticker for real-time data collection
+│   ├── broker_access_token_request.py # Fetches/refreshes access tokens
+│   ├── equity_universe_updater.py # Updates instrument list from NSE
+│   ├── instrument_lookup_tables_creator.py # Creates instrument-to-table mappings
+│   ├── daily_market_data_backup.py # Daily data backup functionality
+│   ├── market_data_mailer.py    # Email notification system
+│   ├── market_data_attachment_mailer.py # Email notification system with attachments
+│   ├── check_trading_holiday.py # Trading holiday detection
+│   ├── validate_system_config.py # Configuration validation
+│   ├── system_error_logger.py   # Error logging system
+│   └── getExpiryPrefix/         # Utility for expiry calculations
+│       └── getExpiryPrefix.py
+├── config/                      # Configuration files
+│   ├── market_data_config.json # Main configuration file
+│   └── market_data_requirements.txt # Python dependencies
+├── data/                        # Data files
+│   ├── ind_nifty500list.csv     # Nifty 500 stock list
+│   └── tradingHolidaysAllYears.csv # Trading holiday calendar
+├── scripts/                     # Standalone scripts
+│   ├── manual_access_token_request.py # Manual access token request
+│   └── trading_holiday_shutdown.py # Trading holiday system shutdown
 ├── utils/                       # Utility modules
 │   ├── config_manager.py        # Configuration management
 │   ├── db_manager.py            # Database connection management
 │   ├── error_handler.py         # Error handling utilities
 │   └── logger.py                # Logging utilities
+├── docs/                        # Documentation
 └── README.md                    # This file
 ```
 
@@ -316,9 +329,9 @@ ORDER BY timestamp DESC LIMIT 5;
 ### Log Files
 
 Check the log files in the `logs/` directory (created automatically) for detailed debugging information:
-- `market_data_main.log` - Main workflow logs
-- `market_data_ticker.log` - Ticker operation logs
-- `error.log` - Error logs
+- `logs/[date]_market_data_logs/market_data_main_logs_[date].log` - Main workflow logs
+- `logs/[date]_market_data_logs/market_data_ticker_logs_[date].log` - Ticker operation logs
+- `logs/[date]_market_data_logs/error.log` - Error logs
 
 ### Debug Mode
 

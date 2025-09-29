@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Logs in to Broker with the latest access token found in {token_database_name}.broker_tokens
 Gets instrument_tokens from equity_universe_token_list.csv, index_token_list.csv, nifty_options_token_list.csv and bank_nifty_options_token_list.csv in the lookup_tables directory.
@@ -29,6 +29,11 @@ import psycopg2
 from kiteconnect import KiteTicker
 import traceback
 import json
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from market_data_mailer import send_market_data_email
 from sqlalchemy import create_engine
 from threading import Timer

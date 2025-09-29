@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Can be Run standalone
 
@@ -53,6 +53,11 @@ ChangeLog:
     - Resilient to changes in the expiry day (wednesday, 2nd saturday, 45th friday...)
 
 """
+
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import pandas as pd
 from datetime import datetime as dt, timedelta, date

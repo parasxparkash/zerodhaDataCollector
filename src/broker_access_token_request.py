@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Install Chrome in Linux
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -36,6 +36,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from kiteconnect import KiteConnect # pip install kiteconnect==5.0.1
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from market_data_mailer import send_market_data_email
 from webdriver_manager.chrome import ChromeDriverManager #pip install webdriver_manager==4.0.1
 import pyotp #pip install pyotp

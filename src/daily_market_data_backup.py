@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Dumps the tables from the 'Daily' databases to a backup database.
 1. Maintaines efficiency of replace statements in daily tables as they would have one day's data at most 
@@ -17,6 +17,11 @@ Reports about backup failures.
 End of market_data_main
 Returns True if success. Else False.
 """
+
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from datetime import datetime as dt, date
 import psycopg2

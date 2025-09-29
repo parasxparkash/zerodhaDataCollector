@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 Configuration management module
 """
 import json
@@ -24,7 +24,7 @@ class ConfigManager:
                     cls._instance = super().__new__(cls)
         return cls._instance
     
-    def load_config(self, config_path: str = 'market_data_config.json') -> Dict[str, Any]:
+    def load_config(self, config_path: str = '../config/market_data_config.json') -> Dict[str, Any]:
         """
         Load configuration from file
         """

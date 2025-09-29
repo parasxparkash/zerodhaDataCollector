@@ -14,7 +14,7 @@ Logs/backupLogAnalyzer.py
 /Logs
 /zerodhaInstrumentDumps
 
-# Market Data Acquisition System files
+# Zerodha Data Collector files
 /instrument_lookup_tables/
 /equity_universe_lookup.csv
 /broker_instrument_dump.csv

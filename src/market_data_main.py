@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 """
 
 import sys
 import multiprocessing
 from datetime import datetime as dt, date
+
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from check_trading_holiday import check_trading_holiday
 from broker_access_token_request import request_broker_access_token
@@ -19,6 +24,7 @@ from daily_market_data_backup import run_daily_market_data_backup
 from market_data_mailer import send_market_data_email
 import json
 from validate_system_config import is_system_config_default
+from system_error_logger import log_system_error
 from utils.logger import get_market_data_main_logger
 from utils.error_handler import ErrorHandler
 

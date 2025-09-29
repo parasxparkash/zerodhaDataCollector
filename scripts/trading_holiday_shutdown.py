@@ -1,7 +1,12 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 """
+
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from check_trading_holiday import check_trading_holiday
 from datetime import date

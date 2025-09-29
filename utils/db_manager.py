@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 Database connection management module
 """
 import psycopg2

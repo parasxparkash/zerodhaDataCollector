@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 The only automation failure I have faced in the past (almost) 4 years for this project is when Broker makes changes in their Login Page
 This breaks the Selenium automation used for access_token_request
@@ -13,8 +13,13 @@ In short, on automation failure, you can run manual_access_token_request and the
 
 """
 
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from kiteconnect import KiteConnect # pip install kiteconnect==5.0.1
-import MySQLdb #sudo apt-get install python3-mysqldb
+import psycopg2
 import json
 from os import path, makedirs
 from datetime import datetime as dt, date
@@ -53,8 +58,7 @@ def request_manual_access_token():
     Manually request access token by providing the redirect URL
     """
     try:
-        connection = MySQLdb.connect(host=database_host, user=database_user, passwd=database_password, port=database_port)
-        connection.autocommit(True)
+        connection = psycopg2.connect(host=database_host, user=database_user, password=database_password, port=database_port)
         cursor = connection.cursor()
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {token_database_name}")
         cursor.execute(f"CREATE TABLE IF NOT EXISTS {token_database_name}.broker_tokens (timestamp DATETIME UNIQUE, request_url varchar(255), request_token varchar(255), access_token varchar(255))")

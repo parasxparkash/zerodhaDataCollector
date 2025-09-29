@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 Error handling and exception management module
 """
 import traceback
@@ -27,6 +27,11 @@ class ErrorHandler:
         if should_notify:
             # Import mailer here to avoid circular dependencies
             try:
+                import sys
+                import os
+                # Add src directory to Python path to allow imports
+                sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'src'))
+                
                 from market_data_mailer import send_market_data_email
                 send_market_data_email('Market Data System Error', full_message)
             except ImportError:

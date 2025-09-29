@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 """
 
 from utils.logger import get_config_validation_logger

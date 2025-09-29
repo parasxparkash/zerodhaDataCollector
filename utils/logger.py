@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
-Centralized logging module for the entire system
+Zerodha Data Collector
+Centralized logging module for the Zerodha Data Collector
 """
 import os
 from datetime import datetime, date
@@ -15,7 +15,7 @@ RESET_COLOR = '\033[0m'
 
 class MarketDataLogger:
     """
-    Centralized logger for the market data acquisition system
+    Centralized logger for the zerodha data collector
     """
     def __init__(self, module_name):
         self.module_name = module_name

@@ -1,6 +1,6 @@
 """
 Author: Paras Parkash
-Source: Market Data Acquisition System
+Zerodha Data Collector
 
 Based on holiday checking logic from various sources
 
@@ -21,6 +21,11 @@ Can be Run standalone - Checks if today is a holiday
 Return True if the given date is found in the holiday list. Else False.
 
 """
+
+import sys
+import os
+# Add src directory to Python path to allow imports
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import pandas as pd
 from datetime import datetime as dt, date, timedelta
@@ -43,6 +48,9 @@ def get_holiday_list_from_upstox():
     """
     Fetch holiday list from Upstox API
     """
+    logger = get_holiday_check_logger()
+    error_handler = ErrorHandler()
+    
     upstox_endpoint = 'https://api.upstox.com/v2/market/holidays'
     upstox_holiday_list = []
     
